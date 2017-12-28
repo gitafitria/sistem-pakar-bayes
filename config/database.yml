@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: bayes_development
+
+test:
+  <<: *default
+  database: bayes_test
+
+production:
+  <<: *default
+  database: bayes_production

@@ -1,0 +1,26 @@
+<h4>
+  <%= trouble.new_record? ? 'Register Trouble' : "Edit ##{trouble.id}" %>
+</h4>
+
+<%= form_for(trouble) do |f| %>
+  <% if trouble.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trouble.errors.count, "error") %> prohibited this trouble from being saved:</h2>
+
+      <ul>
+      <% trouble.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :trouble_name %>
+    <%= f.text_field :trouble_name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
