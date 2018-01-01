@@ -1,0 +1,21 @@
+p#notice
+  = notice
+p
+  strong
+    | Trouble:
+  = @rule.trouble.trouble_name
+p
+  strong
+    | Indication:
+  = @rule.indication.indication_name
+p
+  strong
+    | Weight:
+  = @rule.weight
+p
+  strong
+    | Is active:
+  = @rule.is_active
+= link_to 'Edit', edit_rule_path(@rule)
+|  | 
+= link_to 'Back', rules_path

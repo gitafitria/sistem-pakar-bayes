@@ -1,1 +1,2 @@
-| alert("test");
+| $("#consultation_result_wrapper").html("#{j render 'consultations/consultation_result', results: @results}");
+| $("#consultation_result_modal").modal('show');

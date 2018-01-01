@@ -1,0 +1,18 @@
+= simple_form_for(indication) do |f|
+  - if indication.errors.any?
+    #error_explanation
+      h2
+        = pluralize(indication.errors.count, "error")
+        |  prohibited this indication from being saved:
+      ul
+        - indication.errors.full_messages.each do |message|
+          li
+            = message
+  .form-group
+    = f.input :indication_name, input_html: {class: 'form-control'}
+
+  / .form-group
+  /   = f.input :is_active
+
+  .actions
+    = f.submit

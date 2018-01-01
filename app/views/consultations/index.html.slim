@@ -4,7 +4,7 @@ h1 Consultation
   .col-md-12 = "Pilih Gejala"
 
 .row.form-group
-  .col-md-1 = "checkbox"
+  .col-md-1 = ""
   .col-md-1 = "No"
   .col-md-10 = "Indications"
 
@@ -14,4 +14,7 @@ h1 Consultation
       .col-md-1 = check_box_tag "consultation[indication_ids][]", indication.id
       .col-md-1 = idx + 1
       .col-md-10 = indication.indication_name
-  = f.submit
+  
+  = f.submit "Calculate", class: "btn btn-primary"
+
+#consultation_result_wrapper

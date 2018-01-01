@@ -1,0 +1,31 @@
+p#notice
+  = notice
+h1
+  | Troubles
+.row
+  .col-md-12.text-right
+    = link_to 'New Trouble', new_trouble_path, class: "btn btn-primary"
+
+table.table
+  thead
+    tr
+      th
+        | Trouble name
+      th
+        | Weight
+      th
+        | Is active
+      th[colspan="3"]
+  tbody
+    - @troubles.each do |trouble|
+      tr
+        td
+          = trouble.trouble_name
+        td
+          = trouble.weight
+        td
+          = link_to 'Show', trouble
+        td
+          = link_to 'Edit', edit_trouble_path(trouble)
+        td
+          = link_to 'Destroy', trouble, method: :delete, data: { confirm: 'Are you sure?' }

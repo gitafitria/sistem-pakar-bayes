@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Trouble name:
+  = @trouble.trouble_name
+p
+  strong
+    | Is active:
+  = @trouble.is_active
+= link_to 'Edit', edit_trouble_path(@trouble)
+|  | 
+= link_to 'Back', troubles_path

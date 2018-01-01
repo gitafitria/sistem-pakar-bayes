@@ -1,0 +1,20 @@
+h4
+  = trouble.new_record? ? 'Register Trouble' : "Edit ##{trouble.id}"
+= simple_form_for(trouble) do |f|
+  - if trouble.errors.any?
+    #error_explanation
+      h2
+        = pluralize(trouble.errors.count, "error")
+        |  prohibited this trouble from being saved:
+      ul
+        - trouble.errors.full_messages.each do |message|
+          li
+            = message
+  .form-group
+    = f.input :trouble_name, input_html: {class: 'form-control'}
+
+  .form-group
+    = f.input :weight, input_html: {class: 'form-control'}
+
+  .actions
+    = f.submit

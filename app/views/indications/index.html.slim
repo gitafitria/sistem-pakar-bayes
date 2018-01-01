@@ -1,0 +1,31 @@
+p#notice
+  = notice
+
+h2
+  | Indications
+.row
+  .col-md-12.text-right
+    = link_to 'New Indication', new_indication_path, class: "btn btn-primary"
+
+
+table.table
+  thead
+    tr
+      th
+        | Indication name
+      th
+        | Is active
+      th[colspan="3"]
+  tbody
+    - @indications.each do |indication|
+      tr
+        td
+          = indication.indication_name
+        td
+          = indication.is_active
+        td
+          = link_to 'Show', indication
+        td
+          = link_to 'Edit', edit_indication_path(indication)
+        td
+          = link_to 'Destroy', indication, method: :delete, data: { confirm: 'Are you sure?' }

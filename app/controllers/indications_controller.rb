@@ -25,7 +25,8 @@ class IndicationsController < ApplicationController
   # POST /indications.json
   def create
     @indication = Indication.new(indication_params)
-
+    @indication.is_active = true
+    
     respond_to do |format|
       if @indication.save
         format.html { redirect_to @indication, notice: 'Indication was successfully created.' }

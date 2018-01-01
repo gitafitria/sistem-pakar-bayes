@@ -1,0 +1,77 @@
+.modal.fade id="consultation_result_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close cancel-isolate-group-modal" data-dismiss="modal" aria-label="close"
+          span aria-hidden="true"
+            = "x"
+        h4 = "Consultation Result"
+
+      .modal-body
+        - selected_indications = results[:selected_indications]
+        - trouble_ids = results[:troubles_result].keys.join(',')
+        - troubles_multiply = results[:troubles_multiply]
+        - troubles_result = results[:troubles_result]
+        - sum_multiply = results[:sum_multiply]
+        - selected_indication_size = selected_indications.split(',').size
+        - result_consultation = troubles_result.max_by{|k,v| v}
+        - result_trouble = Trouble.find(result_consultation[0])
+
+        p
+          b = "Result of consultation is "
+          b: u = "#{result_trouble.trouble_name}"
+          b = " with value = #{result_consultation[1].round(5)}"
+
+        hr
+        table.table
+          thead
+            tr
+              th colspan="2"
+                | Gejala Terpilih
+            tr
+              th = "No"
+              th = "Nama Gejala"
+          tbody
+            - Indication.where("id in (#{selected_indications})").order(:id).each_with_index do |indication, idx|
+              tr
+                td = idx + 1
+                td = indication.indication_name
+        hr
+        table.table
+          thead
+            tr
+              th colspan="6"
+                | Hasil Analisa
+            tr
+              th = "Trouble name"
+              th = "Trouble weight"
+              th = "Selected indications"
+              th = "Rule weight"
+              th = "Multiplicity"
+              th = "Result"
+          tbody
+            - Rule.where("troubles.id in (#{trouble_ids}) and indications.id in (#{selected_indications})").joins(:trouble, :indication).group_by(&:trouble_id).each do |trouble_id, rule|
+              - trouble = Trouble.find(trouble_id)
+
+              - rule.each_with_index do |rule, idx|
+                - if idx == 0
+                  tr
+                    td rowspan="#{selected_indication_size}" = "#{trouble.trouble_name}"
+                    td rowspan="#{selected_indication_size}" = trouble.weight
+                    td = rule.indication.indication_name
+                    td = rule.weight
+                    td rowspan="#{selected_indication_size}" = troubles_multiply["#{trouble_id}"].round(5)
+                    td rowspan="#{selected_indication_size}" = troubles_result["#{trouble_id}"].round(5)
+                - else
+                  tr
+                    td = rule.indication.indication_name
+                    td = rule.weight
+            tr
+              td colspan="4" = "Total"
+              td colspan="2" = sum_multiply.round(5)
+
+      .modal-footer
+        button type="button" class="btn cancel-isolate-group-modal" data-dismiss="modal" aria-label="close"
+          = "Close"
+        = " "
+        = link_to "New Consultation", consultations_path, class: "btn btn-primary"

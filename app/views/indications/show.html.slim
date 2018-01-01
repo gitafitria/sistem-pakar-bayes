@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Indication name:
+  = @indication.indication_name
+p
+  strong
+    | Is active:
+  = @indication.is_active
+= link_to 'Edit', edit_indication_path(@indication)
+|  | 
+= link_to 'Back', indications_path

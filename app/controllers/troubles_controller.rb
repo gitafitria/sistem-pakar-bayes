@@ -4,7 +4,7 @@ class TroublesController < ApplicationController
   # GET /troubles
   # GET /troubles.json
   def index
-    @troubles = Trouble.all
+    @troubles = Trouble.where(is_active: true).all
   end
 
   # GET /troubles/1
@@ -72,6 +72,6 @@ class TroublesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trouble_params
-      params.require(:trouble).permit(:trouble_name, :is_active)
+      params.require(:trouble).permit(:trouble_name, :weight, :is_active)
     end
 end
