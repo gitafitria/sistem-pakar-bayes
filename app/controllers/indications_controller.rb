@@ -4,7 +4,7 @@ class IndicationsController < ApplicationController
   # GET /indications
   # GET /indications.json
   def index
-    @indications = Indication.all
+    @indications = Indication.order(:created_at)
   end
 
   # GET /indications/1
@@ -29,11 +29,9 @@ class IndicationsController < ApplicationController
     
     respond_to do |format|
       if @indication.save
-        format.html { redirect_to @indication, notice: 'Indication was successfully created.' }
-        format.json { render :show, status: :created, location: @indication }
+        format.html { redirect_to indications_path, notice: 'Indication was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @indication.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,11 +41,9 @@ class IndicationsController < ApplicationController
   def update
     respond_to do |format|
       if @indication.update(indication_params)
-        format.html { redirect_to @indication, notice: 'Indication was successfully updated.' }
-        format.json { render :show, status: :ok, location: @indication }
+        format.html { redirect_to indications_path, notice: 'Indication was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @indication.errors, status: :unprocessable_entity }
       end
     end
   end

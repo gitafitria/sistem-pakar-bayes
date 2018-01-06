@@ -17,3 +17,19 @@
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap.min
 //= require_tree .
+
+function dataTablesLoad() {
+  // $("table[role='datatable']").DataTable();
+  $("table[role='datatable']").DataTable({"dom": '<"top"f>rt<"text-left"p><"clear">', "pageLength": 5})
+
+}
+
+var ready;
+ready = function() {
+  dataTablesLoad();
+
+};
+
+$(document).ready(ready);
+$(document).on('turbolinks:load', ready);
+// $(document).ajaxComplete(ready);

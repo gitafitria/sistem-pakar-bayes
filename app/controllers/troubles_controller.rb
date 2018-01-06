@@ -4,7 +4,7 @@ class TroublesController < ApplicationController
   # GET /troubles
   # GET /troubles.json
   def index
-    @troubles = Trouble.where(is_active: true).all
+    @troubles = Trouble.order(:created_at)
   end
 
   # GET /troubles/1
@@ -29,11 +29,9 @@ class TroublesController < ApplicationController
 
     respond_to do |format|
       if @trouble.save
-        format.html { redirect_to @trouble, notice: 'Trouble was successfully created.' }
-        format.json { render :show, status: :created, location: @trouble }
+        format.html { redirect_to troubles_path, notice: 'Trouble was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @trouble.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,11 +41,9 @@ class TroublesController < ApplicationController
   def update
     respond_to do |format|
       if @trouble.update(trouble_params)
-        format.html { redirect_to @trouble, notice: 'Trouble was successfully updated.' }
-        format.json { render :show, status: :ok, location: @trouble }
+        format.html { redirect_to troubles_path, notice: 'Trouble was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @trouble.errors, status: :unprocessable_entity }
       end
     end
   end

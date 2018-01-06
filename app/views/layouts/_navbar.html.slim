@@ -2,14 +2,23 @@ nav.navbar
   .container-fluid
     .navbar-header
       .navbar-brand
-        | SPK Bayes
+        = link_to "SP Bayes", root_path
     .navbar-collapse
       ul.nav.navbar-nav
-        li
-          = link_to 'Troubles', troubles_path
-        li
-          = link_to 'Indications', indications_path
-        li
-          = link_to 'Rules', rules_path
+        - if current_user
+          li
+            = link_to 'Troubles', troubles_path
+          li
+            = link_to 'Indications', indications_path
+          li
+            = link_to 'Rules', rules_path
         li
           = link_to 'Consultations', consultations_path
+        - unless current_user
+          li
+            = link_to 'Login', new_user_session_path
+        - if current_user
+          li
+            = link_to 'Password', edit_user_path(current_user)
+          li
+            = link_to 'Logout', destroy_user_session_path, method: :delete

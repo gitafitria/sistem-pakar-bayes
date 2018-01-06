@@ -10,11 +10,19 @@ h4
         - trouble.errors.full_messages.each do |message|
           li
             = message
-  .form-group
-    = f.input :trouble_name, input_html: {class: 'form-control'}
+  .form-group.row
+    .col-md-3
+      = f.label :trouble_name
+    .col-md-6
+      = f.input :trouble_name, input_html: {class: 'form-control'}, label: false
+
+  .form-group.row
+    .col-md-3
+      = f.label :weight
+    .col-md-6
+      = f.input :weight, input_html: {class: 'form-control'}, label: false
 
   .form-group
-    = f.input :weight, input_html: {class: 'form-control'}
-
-  .actions
-    = f.submit
+    = f.submit class: "btn btn-primary"
+    = " "
+    = link_to 'Cancel', troubles_path, class: "btn btn-default"

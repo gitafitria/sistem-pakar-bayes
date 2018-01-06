@@ -1,3 +1,5 @@
+h4
+  = indication.new_record? ? 'Register Indication' : "Edit ##{indication.id}"
 = simple_form_for(indication) do |f|
   - if indication.errors.any?
     #error_explanation
@@ -8,11 +10,17 @@
         - indication.errors.full_messages.each do |message|
           li
             = message
-  .form-group
-    = f.input :indication_name, input_html: {class: 'form-control'}
+  .row.form-group
+    .col-md-3
+      = f.label :indication_name
+    .col-md-6
+      = f.input :indication_name, input_html: {class: 'form-control'}, label: false
 
   / .form-group
   /   = f.input :is_active
 
-  .actions
-    = f.submit
+  .form-group
+    = f.submit class: "btn btn-primary"
+    = " "
+    = link_to 'Cancel', indications_path, class: "btn btn-default"
+

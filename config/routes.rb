@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :users
   resources :rules
-  root 'troubles#index'
+  root 'users#index'
   resources :indications
   resources :troubles
   resources :consultations

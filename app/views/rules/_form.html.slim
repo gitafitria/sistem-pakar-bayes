@@ -1,3 +1,5 @@
+h4
+  = rule.new_record? ? 'Register Rule' : "Edit ##{rule.id}"
 = simple_form_for(rule) do |f|
   - if rule.errors.any?
     #error_explanation
@@ -8,23 +10,24 @@
         - rule.errors.full_messages.each do |message|
           li
             = message
-  .form-group
-    .row
-      .col-md-3
-        = f.label :trouble_id
-      .col-md-9
-        = f.association :trouble, label_method: :trouble_name, value_method: :id, label: false, input_html: {class: 'form-control'}
-  .form-group
-    .row
-      .col-md-3
-        = f.label :indication_id
-      .col-md-9
-        = f.association :indication, label_method: :indication_name, value_method: :id, label: false, input_html: {class: 'form-control'}
-  .form-group
-    .row
-      .col-md-3
-        = f.label :weight
-      .col-md-9
-        = f.input :weight, label: false, input_html: {class: 'form-control'}
-  .actions
-    = f.submit
+  .form-group.row
+    .col-md-3
+      = f.label :trouble_id
+    .col-md-9
+      = f.association :trouble, label_method: :trouble_name, value_method: :id, label: false, input_html: {class: 'form-control'}
+  .form-group.row
+    .col-md-3
+      = f.label :indication_id
+    .col-md-9
+      = f.association :indication, label_method: :indication_name, value_method: :id, label: false, input_html: {class: 'form-control'}
+  .form-group.row
+    .col-md-3
+      = f.label :weight
+    .col-md-9
+      = f.input :weight, label: false, input_html: {class: 'form-control'}
+
+  .row.form-group
+    = f.submit class: "btn btn-primary"
+    = " "
+    = link_to 'Cancel', rules_path, class: "btn btn-default"
+
